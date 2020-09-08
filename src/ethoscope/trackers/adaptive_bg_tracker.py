@@ -288,13 +288,7 @@ class AdaptiveBGModel(BaseTracker):
         #
         mean = cv2.mean(self._buff_grey, mask)
         
-        # Possible division by zero, has to be protected with epsilon, raise a warning
-        
-        if mean[0] == 0:
-            scale = 128. / (mean[0]+1e-10)
-            logging.warning("Division by Zero in image preprocessing.")
-        else:
-            scale = 128. / mean[0]
+        scale = 128. / mean[0]
 
         cv2.multiply(self._buff_grey, scale, dst = self._buff_grey)
 
